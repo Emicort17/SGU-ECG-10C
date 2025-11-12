@@ -1,0 +1,56 @@
+services:
+  database:
+    image: mysql:8
+    container_name: sgu-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sgu-database
+    ports:
+      - "3307:3306"
+    networks:
+      - sgu-net
+    volumes:
+      - sgu-volume:/var/lib/mysql
+
+  frontend:
+    image: client:1.0-sgu
+    build:
+      context: ./front-ECG-10C
+      args:
+        API_HOST: localhost
+        API_PORT: 8080
+        API_BASE: /api/user/
+    container_name: sgu-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - sgu-net
+    depends_on:
+      - database 
+
+  backend:
+    image: server:1.0-sgu
+    build:
+      context: ./SGU-ECG-10C
+    container_name: sgu-backend
+    environment:
+      SERVER_PORT: 8080
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: sgu-database
+      DB_USER: root
+      DB_PASS: root
+    ports:
+      - "8082:8080"
+    networks:
+      - sgu-net
+    depends_on:
+      - frontend 
+
+networks:
+  sgu-net:
+    external: true
+
+volumes:
+  sgu-volume:
+    external: true

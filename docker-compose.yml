@@ -19,7 +19,7 @@ services:
       args:
         API_HOST: localhost
         API_PORT: 8082
-        API_BASE: /api/user
+        API_BASE: /api/users
     container_name: sgu-frontend
     ports:
       - "3000:80"

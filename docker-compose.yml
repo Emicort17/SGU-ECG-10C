@@ -18,7 +18,7 @@ services:
       context: ./front-ECG-10C
       args:
         API_HOST: localhost
-        API_PORT: 8080
+        API_PORT: 8082
         API_BASE: /api/user
     container_name: sgu-frontend
     ports:

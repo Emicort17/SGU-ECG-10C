@@ -6,8 +6,6 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
-
 ARG API_HOST
 ARG API_PORT
 ARG API_BASE
@@ -15,7 +13,8 @@ ARG API_BASE
 ENV VITE_API_HOST=$API_HOST
 ENV VITE_API_PORT=$API_PORT
 ENV VITE_API_BASE=$API_BASE
-    
+
+COPY . .
 
 RUN npm run build
 

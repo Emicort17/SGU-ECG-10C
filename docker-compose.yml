@@ -17,17 +17,17 @@ services:
     build:
       context: ./front-ECG-10C
       args:
-        API_HOST: localhost   
+        API_HOST: localhost
         API_PORT: 8082
         API_BASE: /api/users
-        API_PROTOCOL: http   
     container_name: sgu-frontend
     ports:
       - "3000:80"
+      - "3443:443"
     networks:
       - sgu-net
     depends_on:
-      - database
+      - database 
 
   backend:
     image: server:1.0-sgu
@@ -36,7 +36,7 @@ services:
     container_name: sgu-backend
     environment:
       SERVER_PORT: 8080
-      DB_HOST: sgu-database   
+      DB_HOST: database
       DB_PORT: 3306
       DB_NAME: sgu-database
       DB_USER: root
@@ -49,7 +49,7 @@ services:
     networks:
       - sgu-net
     depends_on:
-      - database            
+      - frontend 
 
 networks:
   sgu-net:

@@ -1,7 +1,7 @@
 const ServerController = {};
 const ENV = import.meta.env;
 
-const API_URL = `https://${ENV.VITE_API_HOST}:${ENV.VITE_API_PORT}${ENV.VITE_API_BASE}`
+const API_URL = `${ENV.VITE_API_PROTOCOL}://${ENV.VITE_API_HOST}:${ENV.VITE_API_PORT}${ENV.VITE_API_BASE}`;
 
 async function handleResponse(response) {
     if (!response) return null;
@@ -9,7 +9,6 @@ async function handleResponse(response) {
     try {
         return JSON.parse(text || 'null');
     } catch (e) {
-        // not json
         return text;
     }
 }

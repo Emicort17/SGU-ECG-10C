@@ -41,7 +41,7 @@ services:
       DB_NAME: sgu-database
       DB_USER: root
       DB_PASS: root
-      SERVER_SSL_ENABLE: true
+      SERVER_SSL_ENABLE: false
       SERVER_SSL_KEYSTORE: /etc/letsencrypt/live/localhost/keystore.p12
       SERVER_SSL_KEYSTORE_PASS: changeit
     ports:
